@@ -208,6 +208,7 @@ class HomeFragment : Fragment() {
                 val arreglo = ArrayList<String>()
                 for (documento in query!!){
                     var cadena =
+                            "id:${documento.id}\n"+
                             "descripcion: ${documento.getString("descripcion")}\n"+
                             "division: ${documento.getString("division")}\n"+
                             "cantidad_empleados: ${documento.getLong("cantidad_empleados")}"

@@ -52,28 +52,37 @@
 
     <Button
         android:id="@+id/bDescripcion"
-        android:layout_width="140sp"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tBusqueda"
-        android:text="Descripcion" />
+        android:text="P Desc" />
 
     <Button
         android:id="@+id/bDivision"
-        android:layout_width="105sp"
+        android:layout_width="90sp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tBusqueda"
         android:layout_marginLeft="10sp"
         android:layout_toRightOf="@+id/bDescripcion"
-        android:text="Division" />
+        android:text="P Div" />
 
     <Button
         android:id="@+id/bIdEdificio"
-        android:layout_width="140sp"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tBusqueda"
         android:layout_marginLeft="10sp"
         android:layout_toRightOf="@id/bDivision"
-        android:text="IdEdificio"/>
+        android:text="P Id Edif"/>
+
+    <Button
+        android:id="@+id/bReset"
+        android:layout_width="90sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBusqueda"
+        android:layout_marginLeft="10sp"
+        android:layout_toRightOf="@id/bIdEdificio"
+        android:text="Reset"/>
 
     <ListView
         android:layout_width="190sp"

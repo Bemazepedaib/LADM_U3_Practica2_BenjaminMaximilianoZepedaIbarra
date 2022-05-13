@@ -40,7 +40,7 @@ class DashboardFragment : Fragment() {
         consultar()
 
         binding.bInsertar.setOnClickListener {
-            if (idArea.equals("-1")){
+            if (idArea.equals("-1")) {
                 Toast.makeText(requireContext(), "Seleccione un Area primero", Toast.LENGTH_SHORT)
                     .show()
                 return@setOnClickListener
@@ -54,30 +54,38 @@ class DashboardFragment : Fragment() {
                 )
                 baseDatos.collection("subdepartamento")
                     .add(datos)
-                    .addOnSuccessListener{
+                    .addOnSuccessListener {
                         //SI SE PUDO!
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             "Dato insertado exitosamente",
-                            Toast.LENGTH_LONG)
+                            Toast.LENGTH_LONG
+                        )
                             .show()
                     }
-                    .addOnFailureListener{
-                        Toast.makeText(requireContext(),
+                    .addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(),
                             "No se ha insertado de forma correcta",
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 binding.aIEdificio.setText("")
                 binding.aPiso.setText("")
-                idArea="-1"
+                idArea = "-1"
                 Toast.makeText(requireContext(), "Se ha agregado correctamente", Toast.LENGTH_SHORT)
                     .show()
             }
         }
 
-        binding.bActualizar.setOnClickListener{
-            if (idSub.equals("-1")){
-                Toast.makeText(requireContext(), "Seleccione un SubDepartamento primero", Toast.LENGTH_SHORT)
+        binding.bActualizar.setOnClickListener {
+            if (idSub.equals("-1")) {
+                Toast.makeText(
+                    requireContext(),
+                    "Seleccione un SubDepartamento primero",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 return@setOnClickListener
             } else {
@@ -88,21 +96,25 @@ class DashboardFragment : Fragment() {
                     .document(idSub)
                     .update(
                         "idarea", idArea,
-                        "idedificio",idEdificio,
-                        "piso",piso
+                        "idedificio", idEdificio,
+                        "piso", piso
                     ).addOnSuccessListener {
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             "Dato actualizado exitosamente",
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                         binding.aIEdificio.setText("")
                         binding.aPiso.setText("")
-                        idSub="-1"
+                        idSub = "-1"
                     }
                     .addOnFailureListener {
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             "No se ha actualizado de forma correcta",
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
                 mostrarDatos(idArea)
@@ -110,10 +122,12 @@ class DashboardFragment : Fragment() {
         }
 
         binding.bEliminar.setOnClickListener {
-            if (id.equals("-1")){
-                Toast.makeText(requireContext(),
+            if (id.equals("-1")) {
+                Toast.makeText(
+                    requireContext(),
                     "Elije un dato del listView",
-                    Toast.LENGTH_SHORT)
+                    Toast.LENGTH_SHORT
+                )
                     .show()
                 return@setOnClickListener
             } else {
@@ -122,21 +136,157 @@ class DashboardFragment : Fragment() {
                     .document(idSub)
                     .delete()
                     .addOnSuccessListener {
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             "Dato eliminado exitosamente",
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                         binding.aIEdificio.setText("")
                         binding.aPiso.setText("")
-                        idSub="-1"
+                        idSub = "-1"
                     }
                     .addOnFailureListener {
-                        Toast.makeText(requireContext(),
+                        Toast.makeText(
+                            requireContext(),
                             "No se ha eliminado de forma correcta",
-                            Toast.LENGTH_SHORT)
+                            Toast.LENGTH_SHORT
+                        )
                             .show()
                     }
             }
+        }
+
+        binding.bIdEdificio.setOnClickListener {
+            var busqueda = binding.tBusqueda.text.toString()
+            if (busqueda.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Escriba algo en el cámpo de búsqueda",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+                return@setOnClickListener
+            } else {
+                baseDatos
+                    .collection("subdepartamento")
+                    .whereEqualTo("idedificio", busqueda.toInt())
+                    .addSnapshotListener { query, error ->
+                        if (error != null) {
+                            AlertDialog.Builder(requireContext())
+                                .setMessage(error.message)
+                                .show()
+                            return@addSnapshotListener
+                        }
+                        val arreglo = ArrayList<String>()
+                        for (documento in query!!) {
+                            var cadena =
+                                "idSubdepartamento:${documento.id}\n" +
+                                        "idedificio:${documento.getLong("idedificio")}\n" +
+                                        "piso:${documento.getLong("piso")}\n" +
+                                        "idArea:${documento.getString("idarea")}\n"
+                            arreglo.add(cadena)
+                        }
+                        if (arreglo.size == 0) {
+                            Toast.makeText(
+                                requireContext(),
+                                "No se encontraron datos",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                            binding.listaDatosEdificio.adapter = ArrayAdapter<String>(
+                                requireActivity(),
+                                R.layout.simple_list_item_1, arreglo
+                            )
+                        } else {
+                            binding.listaDatosEdificio.adapter = ArrayAdapter<String>(
+                                requireActivity(),
+                                R.layout.simple_list_item_1, arreglo
+                            )
+                            Toast.makeText(
+                                requireContext(),
+                                "Los datos se han mostrado en el listView derecho, el izquierdo " +
+                                        "no interactua en este consulta",
+                                Toast.LENGTH_SHORT
+                            )
+                                .show()
+                        }
+                    }
+            }
+        }
+
+        binding.bDescripcion.setOnClickListener {
+            var busqueda = binding.tBusqueda.text.toString()
+            baseDatos
+                .collection("area")
+                .whereEqualTo("descripcion", busqueda)
+                .addSnapshotListener{ query, error->
+                    if(error!=null){
+                        AlertDialog.Builder(requireContext())
+                            .setMessage(error.message)
+                            .show()
+                        return@addSnapshotListener
+                    }
+                    val arreglo = ArrayList<String>()
+                    for (documento in query!!){
+                        var cadena =
+                            "id:${documento.id}\n"+
+                            "descripcion: ${documento.getString("descripcion")}\n"+
+                                    "division: ${documento.getString("division")}\n"+
+                                    "cantidad_empleados: ${documento.getLong("cantidad_empleados")}"
+                        arreglo.add(cadena)
+                    }
+                    if (arreglo.size == 0){
+                        Toast.makeText(requireContext(),
+                            "No se encontraron datos",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                        binding.listaDatosArea.adapter = ArrayAdapter<String>(requireActivity(),
+                            R.layout.simple_list_item_1, arreglo)
+                    } else {
+                        binding.listaDatosArea.adapter = ArrayAdapter<String>(requireActivity(),
+                            R.layout.simple_list_item_1, arreglo)
+                    }
+                }
+        }
+
+        binding.bDivision.setOnClickListener {
+            var busqueda = binding.tBusqueda.text.toString()
+            baseDatos
+                .collection("area")
+                .whereEqualTo("division", busqueda)
+                .addSnapshotListener{ query, error->
+                    if(error!=null){
+                        AlertDialog.Builder(requireContext())
+                            .setMessage(error.message)
+                            .show()
+                        return@addSnapshotListener
+                    }
+                    val arreglo = ArrayList<String>()
+                    for (documento in query!!){
+                        var cadena =
+                            "id:${documento.id}\n"+
+                            "descripcion: ${documento.getString("descripcion")}\n"+
+                                    "division: ${documento.getString("division")}\n"+
+                                    "cantidad_empleados: ${documento.getLong("cantidad_empleados")}"
+                        arreglo.add(cadena)
+                    }
+                    if (arreglo.size == 0){
+                        Toast.makeText(requireContext(),
+                            "No se encontraron datos",
+                            Toast.LENGTH_SHORT)
+                            .show()
+                        binding.listaDatosArea.adapter = ArrayAdapter<String>(requireActivity(),
+                            R.layout.simple_list_item_1, arreglo)
+                    } else {
+                        binding.listaDatosArea.adapter = ArrayAdapter<String>(requireActivity(),
+                            R.layout.simple_list_item_1, arreglo)
+                    }
+                }
+        }
+
+        binding.bReset.setOnClickListener {
+            consultar()
         }
 
         binding.listaDatosArea.setOnItemClickListener{ adapterView, view, i, l ->
