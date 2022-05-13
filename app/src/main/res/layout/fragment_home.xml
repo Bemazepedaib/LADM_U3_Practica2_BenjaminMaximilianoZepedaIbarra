@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment"
+    android:padding="5dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Buscar por Descripcion o Division"
+        android:id="@+id/tBusqueda" />
+
+    <Button
+        android:id="@+id/bDescripcion"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBusqueda"
+        android:text="Descripcion" />
+
+    <Button
+        android:id="@+id/bDivision"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBusqueda"
+        android:layout_marginLeft="40sp"
+        android:layout_toRightOf="@+id/bDescripcion"
+        android:text="Division" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Agregar Descripcion"
+        android:id="@+id/aDescripcion"
+        android:layout_below="@id/bDivision"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Agregar Division"
+        android:id="@+id/aDivision"
+        android:layout_below="@id/aDescripcion"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Agregar Cantidad Empleados"
+        android:id="@+id/aCEmpleados"
+        android:layout_below="@id/aDivision"/>
+
+    <Button
+        android:id="@+id/bInsertar"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aCEmpleados"
+        android:text="Insertar" />
+
+    <Button
+        android:id="@+id/bActualizar"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aCEmpleados"
+        android:layout_toRightOf="@id/bInsertar"
+        android:layout_marginLeft="40sp"
+        android:text="Actualizar" />
+
+    <Button
+        android:id="@+id/bEliminar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bActualizar"
+        android:text="Eliminar" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listaDatos"
+        android:layout_below="@+id/bEliminar"
+        android:layout_marginBottom="50sp"/>
+
+</RelativeLayout>

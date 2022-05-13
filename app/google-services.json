@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "938642569656",
+    "project_id": "ladmu3practica2bmzi",
+    "storage_bucket": "ladmu3practica2bmzi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:938642569656:android:64738c1295a9f08a00b74d",
+        "android_client_info": {
+          "package_name": "mx.edu.ittepic.ladm_u3_practica2_benjaminmaximilianozepedaibarra"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "938642569656-qaanm9fptr036mricgsm3m4o36r2aiqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYBSKZwH1u5yC2IluYb_7g9uF9skW79E4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "938642569656-qaanm9fptr036mricgsm3m4o36r2aiqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

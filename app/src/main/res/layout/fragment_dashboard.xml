@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.DashboardFragment"
+    android:padding="5dp">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Agregar IdEdificio"
+        android:id="@+id/aIEdificio" />
+
+    <EditText
+        android:id="@+id/aPiso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/aIEdificio"
+        android:hint="Agregar Piso" />
+
+    <Button
+        android:id="@+id/bInsertar"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aPiso"
+        android:text="Insertar" />
+
+    <Button
+        android:id="@+id/bActualizar"
+        android:layout_width="180sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/aPiso"
+        android:layout_toRightOf="@id/bInsertar"
+        android:layout_marginLeft="40sp"
+        android:text="Actualizar" />
+
+    <Button
+        android:id="@+id/bEliminar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bActualizar"
+        android:text="Eliminar" />
+
+    <EditText
+        android:id="@+id/tBusqueda"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bEliminar"
+        android:hint="Buscar por Descripcion, Division o IdEdificio" />
+
+    <Button
+        android:id="@+id/bDescripcion"
+        android:layout_width="140sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBusqueda"
+        android:text="Descripcion" />
+
+    <Button
+        android:id="@+id/bDivision"
+        android:layout_width="105sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBusqueda"
+        android:layout_marginLeft="10sp"
+        android:layout_toRightOf="@+id/bDescripcion"
+        android:text="Division" />
+
+    <Button
+        android:id="@+id/bIdEdificio"
+        android:layout_width="140sp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tBusqueda"
+        android:layout_marginLeft="10sp"
+        android:layout_toRightOf="@id/bDivision"
+        android:text="IdEdificio"/>
+
+    <ListView
+        android:layout_width="190sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/listaDatosArea"
+        android:layout_below="@+id/bDivision"
+        android:layout_marginBottom="50sp"/>
+
+    <ListView
+        android:layout_width="190sp"
+        android:layout_height="wrap_content"
+        android:id="@+id/listaDatosEdificio"
+        android:layout_below="@+id/bDivision"
+        android:layout_marginLeft="20sp"
+        android:layout_toRightOf="@+id/listaDatosArea"
+        android:layout_marginBottom="50sp"/>
+
+</RelativeLayout>
